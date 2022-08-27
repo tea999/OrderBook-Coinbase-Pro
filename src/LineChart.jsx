@@ -5,42 +5,6 @@ function LineChartDisplay(props){
     const [data, setData] = useState([]);
 
 
-
-    // useEffect(() =>{
-    //         const webSocket = new WebSocket("wss://ws-feed.exchange.coinbase.com")
-    //         const request = {
-    //         "type" : "subscribe",
-    //         "product_ids" : [
-    //             props.currency
-    //         ],
-    //         "channels" : ["level2"]
-    //     }
-    //     webSocket.onopen = (e) => {
-    //         webSocket.send(JSON.stringify(request))
-    //     };
-
-    //     webSocket.onmessage = (e) => {
-    //         const msg = JSON.parse(e.data);
-    //         if (msg.type === 'l2update'){
-    //             // grab the time and the price and buy or sell               
-    //                 for (let i = 0; i < msg.changes.length; i++){
-    //                    const dataObj = {
-    //                     transactionType: "",
-    //                     price: 0,
-    //                     time: 0
-    //                 } ;
-    //                 dataObj.transactionType = msg.changes[i][0];
-    //                 dataObj.price = msg.changes[i][1];
-    //                 //converting date string to a timestamp
-    //                 dataObj.time = Date.parse(msg.time);
-    //                 //add each obj to the array
-    //                 setData(data => [...data, dataObj])
-    //             }   
-    //             }
-    //     }
-    // })
-
-
     return (
         <div>
             <LineChart 

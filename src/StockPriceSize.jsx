@@ -36,7 +36,7 @@ function SockPriceSize(props){
                 setBestAskPrice(bestAskPrice);
                 setBestAskQty(bestAskQty);
             } 
-            if (msg.type === 'l2update' && msg.product_id === props.currency){
+            if (msg.type === 'l2update'){
             // grab the time and the price and buy or sell 
                 for (let i = 0; i < msg.changes.length; i++){
                    const dataObj = {
@@ -47,22 +47,25 @@ function SockPriceSize(props){
                 dataObj.transactionType = msg.changes[i][0];
                 dataObj.price = msg.changes[i][1];
                 //converting date string to a timestamp
-                dataObj.time = Date.parse(msg.time)/1000;
+                const time = new Date(msg.time);
+                const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
+                dataObj.time = `${hour}:${minutes}:${seconds}`;
+                // CONTINUE HERE : working on converting date  to just time
                 //add each obj to the array
-                setData(data => [...data, dataObj])
+                // setData((data) => [...data, dataObj])
+                console.log(dataObj)
             }   
             }
+            // add rate limiting here ??
         }
-
-        webSocket.onerror = (e) => {
-            console.log('Websocket error:', e)
+            // DO we need to close websocket??? Maybe when we change the request or close the window
+        //    webSocket.onclose = (e) =>{
+        //         console.log("closed connection")
+        //    }
+            webSocket.onerror = (e) => {
+            console.log('Websocket error:', e.message)
         }
-
-        // DO we need to close websocket??? Maybe when we change the request or close the window
-        // return () => {
-        //     webSocket.close();
-        // }
-    },[props.currency])
+    })
 
     return( 
         <div>
@@ -71,7 +74,7 @@ function SockPriceSize(props){
             <ul>Best Ask Price {bestAskPrice}</ul>
             <ul>Best Ask Qty {bestAskQty}</ul>
         <div>
-            <LineChartDisplay currency={props.currency} data={data}/>
+            {/* <LineChartDisplay currency={props.currency} data={data}/> */}
         </div>
         </div>
     );
