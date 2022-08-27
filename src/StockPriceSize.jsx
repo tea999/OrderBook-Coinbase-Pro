@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 // this will eventuallly accept a prop that will have product_ids
 function SockPriceSize(props){
-    const [price, setPrice] = useState("");
-    const [size, setSize] = useState("");
+    const [bestBidPrice, setBestBidPrice] = useState("");
+    const [bestBidQty, setBestBidQty] = useState("");
+    const [bestAskPrice, setBestAskPrice] = useState("");
+    const [bestAskQty, setBestAskQty] = useState("");
+    const [bidsArr, setBidsArr] = useState([]);
+    const [asksArr, setAsksArr] = useState([]);
+
     
     const webSocket = new WebSocket("wss://ws-feed.exchange.coinbase.com")
     useEffect(() => {
@@ -37,8 +42,8 @@ function SockPriceSize(props){
 
     return(
         <div>
-            Price {price}
-            Size {size}
+            Price 
+            Size 
         </div>
     );
 }
