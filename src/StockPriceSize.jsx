@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import LineChartDisplay from './LineChart';
 
 function SockPriceSize(props){
@@ -7,75 +7,96 @@ function SockPriceSize(props){
     const [bestAskPrice, setBestAskPrice] = useState("");
     const [bestAskQty, setBestAskQty] = useState("");
     const [data, setData] = useState([]);
+    const [isPaused, setIsPaused] = useState(false);
+    const webSocket = useRef(null)
 
-
-    
+    // to open websocket and send requst
+    setInterval(
     useEffect(() => {
-           const webSocket = new WebSocket("wss://ws-feed.exchange.coinbase.com");
-
-           const request = {
+        webSocket.current = new WebSocket("wss://ws-feed.exchange.coinbase.com");
+        const request = {
             "type" : "subscribe",
             "product_ids" : [
                 props.currency
             ],
             "channels" : ["level2"]
         }
-        webSocket.onopen = (e) => {
-            webSocket.send(JSON.stringify(request))
-        };
 
-        webSocket.onmessage = (e) => {
+        webSocket.current.onopen = () => {
+            webSocket.current.send(JSON.stringify(request));
+            console.log('webSocket opened');
+        }
+        webSocket.current.onclose = () => console.log("closed connection")
+
+        webSocket.onerror = (e) => console.log('Websocket error:', e)
+
+        // put the websocket in a new variable for cleanup so it cant be mutated accidentally
+        const webSocketCurrent = webSocket.current;
+        return () => {
+            webSocketCurrent.close()
+        }
+
+    }, [props.currency])
+    ,5000)
+
+
+    // to handle the incoming messages 
+    // setInterval(
+    useEffect(() => {
+        if (!webSocket.current) return;
+        webSocket.current.onmessage = (e) => {
+            if (isPaused) {
+                return
+            };
             const msg = JSON.parse(e.data);
+            // every 15 sec get data get a snapshot or data update
             if (msg.type === 'snapshot'){
                 const bestBidPrice = msg.bids[0][0]
                 const bestBidQty = msg.bids[0][1];
                 const bestAskPrice = msg.asks[0][0];
                 const bestAskQty = msg.asks[0][1];
+                const time = new Date();
+                const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
+                const bidData = {
+                    transactionType: "bid",
+                    price: bestBidPrice,
+                    time: `${hour}:${minutes}:${seconds}`
+                };
+                const askData = {
+                    transactionType: "ask",
+                    price: bestAskPrice,
+                    time: `${hour}:${minutes}:${seconds}`
+                };
                 setBestBidPrice(bestBidPrice);
                 setBestBidQty(bestBidQty);
                 setBestAskPrice(bestAskPrice);
                 setBestAskQty(bestAskQty);
+                setData(prevData => [...prevData, bidData, askData])
             } 
-            if (msg.type === 'l2update'){
-            // grab the time and the price and buy or sell 
-                for (let i = 0; i < msg.changes.length; i++){
-                   const dataObj = {
-                    transactionType: "",
-                    price: 0,
-                    time: 0
-                } ;
-                dataObj.transactionType = msg.changes[i][0];
-                dataObj.price = msg.changes[i][1];
-                //converting date string to a timestamp
-                const time = new Date(msg.time);
-                const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
-                dataObj.time = `${hour}:${minutes}:${seconds}`;
-                // CONTINUE HERE : working on converting date  to just time
-                //add each obj to the array
-                // setData((data) => [...data, dataObj])
-                console.log(dataObj)
-            }   
-            }
-            // add rate limiting here ??
+            
         }
-            // DO we need to close websocket??? Maybe when we change the request or close the window
-        //    webSocket.onclose = (e) =>{
-        //         console.log("closed connection")
-        //    }
-            webSocket.onerror = (e) => {
-            console.log('Websocket error:', e.message)
-        }
-    })
+    },[isPaused, props.currency])
+    // ,5000)
 
+
+        
+    
+
+    console.log(data)
     return( 
         <div>
-            <ul>Best Bid price {bestBidPrice}</ul>
-            <ul>Best Bid Qty {bestBidQty}</ul>
-            <ul>Best Ask Price {bestAskPrice}</ul>
-            <ul>Best Ask Qty {bestAskQty}</ul>
-        <div>
-            {/* <LineChartDisplay currency={props.currency} data={data}/> */}
-        </div>
+            <button onClick={() => setIsPaused(!isPaused)}>
+                {isPaused ? "Continue Data Feed" : "Stop Data Feed"}
+            </button>
+            <div>
+                <ul>Best Bid price {bestBidPrice}</ul>
+                <ul>Best Bid Qty {bestBidQty}</ul>
+                <ul>Best Ask Price {bestAskPrice}</ul>
+                <ul>Best Ask Qty {bestAskQty}</ul>
+            </div>
+            <div>
+                {/* <LineChartDisplay currency={props.currency} data={data}/> */}
+            </div>
         </div>
     );
 }
