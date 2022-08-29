@@ -63,17 +63,12 @@ function SockPriceSize(props){
                 setAsksArr(msg.asks);
                 const time = new Date();
                 const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
-                const bidData = {
-                    transactionType: "bid",
-                    price: msg.bids[0][0],
+                const dataObj = {
+                    bidPrice: msg.bids[0][0],
+                    askPrice: msg.asks[0][0],
                     time: `${hour}:${minutes}:${seconds}`
                 };
-                const askData = {
-                    transactionType: "ask",
-                    price: msg.asks[0][0],
-                    time: `${hour}:${minutes}:${seconds}`
-                };
-                setData(() => [bidData, askData])
+                setData(() => [dataObj])
 
             }
             if (msg.type === "l2update"){
@@ -137,17 +132,12 @@ function SockPriceSize(props){
         //Question - should I use current time or trade time? Also, how do I get this to update like every 15sec starting from 00 to 15 to 30 to 45 or is this a feature of the line graph/rechart library?
         const time = new Date();
         const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
-        const bidData = {
-            transactionType: "bid",
-            price: bestBidPrice,
+        const dataObj = {
+            bidPrice: bestBidPrice,
+            askPrice: bestAskPrice,
             time: `${hour}:${minutes}:${seconds}`
         };
-        const askData = {
-            transactionType: "ask",
-            price: bestAskPrice,
-            time: `${hour}:${minutes}:${seconds}`
-        };
-        setData(prevdata => [...prevdata, bidData, askData])
+        setData(prevdata => [...prevdata, dataObj])
         // console.log('bidsArr.length', bidsArr.length)
 
     }, !isPaused ? delay : null);
