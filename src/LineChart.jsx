@@ -4,13 +4,18 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "r
 //TODO - get the line graph to render data points
 function LineChartDisplay(props){
 
-    console.log(props.data)
+    // console.log(props.data)
+function tick(){
+
+}
+
     return (
         <div>
-            <LineChart width={400} height={400} data={props.data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="1" />
-                <XAxis dataKey='time' />
-                <YAxis  />
+            <LineChart width={500} height={300} data={props.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey='time' 
+                />
+                <YAxis  type='number' domain={[props.bidPrice - 50, props.bidPrice + 50]} />
                 <Tooltip />
                 <Legend />
                 <Line type='monotone' dataKey='askPrice' stroke="#82ca9d" />
@@ -23,4 +28,4 @@ function LineChartDisplay(props){
 
 export default LineChartDisplay;
 
-//{bidPrice: '20263.06', askPrice: '20265.01', time: '12:37:24'}
+//{bidPrice: 20263.06, askPrice: 20265.01, time: '12:37:24'}

@@ -66,10 +66,9 @@ function SockPriceSize(props){
                 const dataObj = {
                     bidPrice: Number(msg.bids[0][0]),
                     askPrice: Number(msg.asks[0][0]),
-                    time: `${hour}:${minutes}:${seconds}`
+                    time: (`${hour}${minutes}${seconds}`)
                 };
                 setData(() => [dataObj])
-
             }
             if (msg.type === "l2update"){
                 // iterate through changes
@@ -135,11 +134,9 @@ function SockPriceSize(props){
         const dataObj = {
             bidPrice: Number(bestBidPrice),
             askPrice: Number(bestAskPrice),
-            time: `${hour}:${minutes}:${seconds}`
+            time: `${hour}${minutes}${seconds}`
         };
         setData(prevdata => [...prevdata, dataObj])
-        // console.log('bidsArr.length', bidsArr.length)
-
     }, !isPaused ? delay : null);
 
     function handlePause(){
