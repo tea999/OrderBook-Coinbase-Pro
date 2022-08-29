@@ -11,7 +11,7 @@ function SockPriceSize(props){
     const webSocket = useRef(null)
     const [bidsArr, setBidsArr] = useState([]);
     const [asksArr, setAsksArr] = useState([]);
-    const [delay, setDelay] = useState(5000);
+    const [delay, setDelay] = useState(1000);
 
     // to open websocket and send requst 
     useEffect(() => {
@@ -64,8 +64,8 @@ function SockPriceSize(props){
                 const time = new Date();
                 const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
                 const dataObj = {
-                    bidPrice: msg.bids[0][0],
-                    askPrice: msg.asks[0][0],
+                    bidPrice: Number(msg.bids[0][0]),
+                    askPrice: Number(msg.asks[0][0]),
                     time: `${hour}:${minutes}:${seconds}`
                 };
                 setData(() => [dataObj])
@@ -133,8 +133,8 @@ function SockPriceSize(props){
         const time = new Date();
         const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
         const dataObj = {
-            bidPrice: bestBidPrice,
-            askPrice: bestAskPrice,
+            bidPrice: Number(bestBidPrice),
+            askPrice: Number(bestAskPrice),
             time: `${hour}:${minutes}:${seconds}`
         };
         setData(prevdata => [...prevdata, dataObj])

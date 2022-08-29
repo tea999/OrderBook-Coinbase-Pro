@@ -7,23 +7,20 @@ function LineChartDisplay(props){
     console.log(props.data)
     return (
         <div>
-            <LineChart 
-                width={400}
-                height={400}
-                // data to be determined
-                data={props.data}
-                margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
-                >
-                <CartesianGrid strokeDasharray="5" />
-                <Legend />
+            <LineChart width={400} height={400} data={props.data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+                <CartesianGrid strokeDasharray="1" />
                 <XAxis dataKey='time' />
-                <YAxis dataKey='bidPrice' />
+                <YAxis  />
                 <Tooltip />
-                <Line type='monotone' name='bid'  dataKey='bidPrice' stroke="##ff7300" />
-                <Line type='monotone' name='ask'  dataKey='askPrice' stroke="##ff7300" strokeWidth={2} />
+                <Legend />
+                <Line type='monotone' dataKey='askPrice' stroke="#82ca9d" />
+                <Line type='monotone' dataKey='bidPrice' stroke="#8884d8" />
+                
             </LineChart>
         </div>
     )
 }
 
 export default LineChartDisplay;
+
+//{bidPrice: '20263.06', askPrice: '20265.01', time: '12:37:24'}
