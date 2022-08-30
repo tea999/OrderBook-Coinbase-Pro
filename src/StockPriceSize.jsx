@@ -62,7 +62,7 @@ function StockPriceSize(props){
                     }else {
                         // you have a "sell"
                         if (size === "0.00000000"){
-                            props.filterAsksArr(price)
+                            props.filterAsksArr(price);
                         }else {
                             props.pushToAsksArr(price,size)
                         }
@@ -72,6 +72,7 @@ function StockPriceSize(props){
         
         }
     },[props.isPaused, props.currency])
+
 
     // creating custom callback since setInterval is rendering incorrectly
     function useInterval(callback,delay){
@@ -98,7 +99,6 @@ function StockPriceSize(props){
 
         // update best bid and best ask states
         props.setBestAfterSort()
-
         const time = new Date();
         const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]
         const dataObj = {

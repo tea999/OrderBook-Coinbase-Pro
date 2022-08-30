@@ -12,8 +12,8 @@ function LineChartDisplay(props){
     }
     return (
         <div id='linechart'>
-            <LineChart width={1000} height={500} data={props.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianAxis strokeDasharray="3 3" />
+            <LineChart width={800} height={500} data={props.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="1" />
                 <XAxis dataKey='time' 
                 />
                 <YAxis  type='number' domain={[min - min/2, max + max/2]} />

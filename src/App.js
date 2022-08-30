@@ -3,7 +3,7 @@ import './App.css';
 import StockPriceSize from './StockPriceSize';
 import CurrencyDropDown from './CurrencyDropDown';
 import LineChartDisplay from './LineChart';
-
+import LadderViewDisplay from './LadderViewDisplay/LadderViewDisplay';
 function App() {
   // put the state here to make components modular
   const [currency, setCurrency] = useState("BTC-USD");
@@ -47,7 +47,10 @@ function handleSnapshotData(msg){
 }
 
 function filterBidsArr(price){
-  setBidsArr(bidsArr.filter(bid => bid[0] !== price))
+  setBidsArr(prevArr => {
+    return prevArr.filter(bid => bid[0] !== price)
+  })
+
 }
 
 function pushToBidsArr(price,size){
@@ -55,8 +58,11 @@ function pushToBidsArr(price,size){
 }
 
 function filterAsksArr(price){
-  setAsksArr(asksArr.filter(ask => ask[0] !== price))
+  setAsksArr(prevArr =>{
+    return prevArr.filter(ask => ask[0] !== price)
+  })
 }
+
 
 function pushToAsksArr(price,size){
   setAsksArr(asks => [...asks, [price,size]])
@@ -67,7 +73,6 @@ function setBestAfterSort(){
   setBestBidQty(bidsArr[0][1]);
   setBestAskPrice(asksArr[0][0]);
   setBestAskQty(asksArr[0][1]); 
-
 }
 
 function setGraphDataAfterSort(dataObj){
@@ -83,7 +88,7 @@ function handlePause(){
       <CurrencyDropDown handleChange={handleChange} currency={currency}/>
       <StockPriceSize currency={currency} bestAskPrice={bestAskPrice} bestAskQty={bestAskQty} bestBidPrice={bestBidPrice} bestBidQty={bestBidQty} graphData={graphData} isPaused={isPaused} bidsArr={bidsArr} asksArr={asksArr} delay={delay} emptyArrays={emptyArrays} handleSnapshotData={handleSnapshotData} filterBidsArr={filterBidsArr} pushToBidsArr={pushToBidsArr} filterAsksArr={filterAsksArr} pushToAsksArr={pushToAsksArr} setBestAfterSort={setBestAfterSort} setGraphDataAfterSort={setGraphDataAfterSort} handlePause={handlePause} />
       <LineChartDisplay currency={currency} data={graphData}/>
-      
+      <LadderViewDisplay asksArr={asksArr} bidsArr={bidsArr}/>
     </div>
   );
 }
