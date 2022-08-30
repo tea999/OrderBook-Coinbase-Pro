@@ -93,11 +93,7 @@ function StockPriceSize(props){
         },[delay])
     }
     useInterval(() => {
-        // sort both arrays based off of highest bid and lowest ask prices     
-        props.bidsArr.sort((a,b) => b[0] - a[0]);
-        props.asksArr.sort((a,b) => a[0] - b[0]);
-
-        // update best bid and best ask states
+        // sort both arrays based off of highest bid and lowest ask prices AND update best bid and best ask states
         props.setBestAfterSort()
         const time = new Date();
         const [hour, minutes, seconds] = [time.getHours(), time.getMinutes(), time.getSeconds()]

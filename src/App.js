@@ -15,7 +15,7 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [bidsArr, setBidsArr] = useState([]);
   const [asksArr, setAsksArr] = useState([]);
-  const [delay, setDelay] = useState(1000);
+  const [delay, setDelay] = useState(5000);
 
   function handleChange(e){
     setCurrency(e.target.value);
@@ -63,12 +63,17 @@ function filterAsksArr(price){
   })
 }
 
-
 function pushToAsksArr(price,size){
   setAsksArr(asks => [...asks, [price,size]])
 }
 
 function setBestAfterSort(){
+  setBidsArr(prevArr => {
+    return prevArr.sort((a,b) => b[0] - a[0])
+  });
+  setAsksArr(prevArr => {
+    return prevArr.sort((a,b) =>a[0] - b[0])
+  });
   setBestBidPrice(bidsArr[0][0]);
   setBestBidQty(bidsArr[0][1]);
   setBestAskPrice(asksArr[0][0]);
