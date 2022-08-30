@@ -1,28 +1,19 @@
 import { useState } from 'react';
 import StockPriceSize from './StockPriceSize';
 
-function CurrencyDropDown(){
-    const [currency, setCurrency] = useState("BTC-USD");
-
-    // changes currency to currency selected
-    function handleChange(e){
-        setCurrency(e.target.value);
-    }
+function CurrencyDropDown(props){
 
     return (
-        <div>
+        <div id="currencydropdown">
             <label>
                 Select a Currency Pair:
-                <select value={currency} onChange={handleChange}>
+                <select value={props.currency} onChange={props.handleChange}>
                     <option value="BTC-USD">BTC-USD</option>
                     <option value="ETH-USD">ETH-USD</option>
                     <option value="LTC-USD">LTC-USD</option>
                     <option value="BCH-USD">BCH-USD</option>
                 </select>
             </label>
-            <div id='stockprices'>
-            <StockPriceSize currency={currency}/>
-            </div>
         </div>
     )
 }
