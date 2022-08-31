@@ -57,6 +57,17 @@ function StockPriceSize(props){
                             // filter out that price,size
                             props.filterBidsArr(price);
                         }else {
+                            // TO DO account for updating a price/size if the price already is present. (LIKE BELOW)
+                            /*
+                            const updatePriceLevel = (updatedLevel: number[], levels: number[][]): number[][] => {
+                                return levels.map(level => {
+                                    if (level[0] === updatedLevel[0]) {
+                                    level = updatedLevel;
+                                    }
+                                    return level;
+                                });
+                                };
+                            */
                             props.pushToBidsArr(price,size);
                         }
                     }else {
