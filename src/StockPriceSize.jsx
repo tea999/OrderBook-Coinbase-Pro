@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import LineChartDisplay from './LineChart';
 
 function StockPriceSize(props){
     const webSocket = useRef(null)
@@ -103,6 +102,7 @@ function StockPriceSize(props){
             }
         },[delay])
     }
+
     useInterval(() => {
         // sort both arrays based off of highest bid and lowest ask prices AND update best bid and best ask states
         props.setBestAfterSort()
@@ -115,7 +115,6 @@ function StockPriceSize(props){
         }; 
         props.setGraphDataAfterSort(dataObj);
     }, !props.isPaused ? props.delay : null);
-
 
 
     return( 
