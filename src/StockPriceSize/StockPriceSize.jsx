@@ -30,8 +30,6 @@ function StockPriceSize(props){
             webSocketCurrent.close()
         }
     }, [props.currency])
-// if props currency changes empty the arrays and data sets
-
     // to handle the incoming messagess/grab all data
     useEffect(() => {
         if (!webSocket.current) return;
@@ -56,25 +54,15 @@ function StockPriceSize(props){
                             // filter out that price,size
                             props.filterBidsArr(price);
                         }else {
-                            // TO DO account for updating a price/size if the price already is present. (LIKE BELOW)
-                            /*
-                            const updatePriceLevel = (updatedLevel: number[], levels: number[][]): number[][] => {
-                                return levels.map(level => {
-                                    if (level[0] === updatedLevel[0]) {
-                                    level = updatedLevel;
-                                    }
-                                    return level;
-                                });
-                                };
-                            */
-                            props.pushToBidsArr(price,size);
+                           // will update size or push to bidsArr
+                            props.updateLevels(price,size, 'bids')
                         }
                     }else {
                         // you have a "sell"
                         if (size === "0.00000000"){
                             props.filterAsksArr(price);
                         }else {
-                            props.pushToAsksArr(price,size)
+                            props.updateLevels(price,size, 'asks')
                         }
                     }
                 }
@@ -82,7 +70,6 @@ function StockPriceSize(props){
         
         }
     },[props.isPaused, props.currency])
-
 
     // creating custom callback since setInterval is rendering incorrectly
     function useInterval(callback,delay){

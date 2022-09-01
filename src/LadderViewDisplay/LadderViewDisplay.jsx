@@ -1,20 +1,20 @@
 import {useEffect, useState} from 'react';
-
+import './LadderViewDisplay.css'
 function LadderViewDisplay(props){
     const [asksRows,setAsksRows] = useState([]);
     const [bidsRows, setBidsRows] = useState([]);
-    const [increment, setIncrement] = useState(.50);
     const [spread, setSpread] = useState(0);
+
+    let aggregation = props.aggregation;
 
     useEffect(() =>{
     //logic for grouping
-    function roundToPriceIncrement(price, increment){
-        return Math.floor(price/increment) * increment;
+    function roundToPriceAggregation(price, aggregation){
+        return Math.floor(price/aggregation) * aggregation;
     }
     
     function priceGrouping(levelsArr){
         //levelsArr could be  asksArr or bid arr
-
         const filteredLevelsObj = {};
         levelsArr.forEach(level => {
             const price = level[0];
@@ -29,18 +29,18 @@ function LadderViewDisplay(props){
         return Object.entries(filteredLevelsObj);
     }
 
-    // will group level by prices based on increment set
-    function groupByIncrement(levelsArr, increment){
+    // will group level by prices based on aggregation set
+    function groupByAggregation(levelsArr, aggregation){
         const roundAllPrices = levelsArr.map(level => {
-            const roundedPrice = roundToPriceIncrement(level[0], increment)
+            const roundedPrice = roundToPriceAggregation(level[0], aggregation)
             // type coercion occurred and roundedPrice aka price is now a number. This is ok. Converted level[1] to a number so it can be added in priceGrouping
             return [(roundedPrice).toFixed(2), +level[1]]
         });
         return priceGrouping(roundAllPrices)
     }
 
-    function makeTableRows(levelsArr, aksOrBids){
-        if (aksOrBids === 'asks'){
+    function makeTableRows(levelsArr, transactionType){
+        if (transactionType === 'asks'){
             levelsArr.reverse();
         }
         return levelsArr.map((level, index) => {
@@ -56,48 +56,47 @@ function LadderViewDisplay(props){
 
 }
 
-
-
-        const groupedAsksArr = groupByIncrement(props.asksArr, increment)
-        const groupedBidsArr = groupByIncrement(props.bidsArr,increment)        
+        const groupedAsksArr = groupByAggregation(props.asksArr, aggregation)
+        const groupedBidsArr = groupByAggregation(props.bidsArr,aggregation)        
         const asksRows = makeTableRows(groupedAsksArr.slice(0,10), 'asks');
         const bidsRows = makeTableRows(groupedBidsArr.slice(0,10), 'bids');
         setAsksRows(asksRows);
         setBidsRows(bidsRows);
 
-    },[props.asksArr, props.bidsArr, increment])
+    },[props.asksArr, props.bidsArr, aggregation])
 
-    //TO DO - make button for grouping increments 
-    // increments - .01, .50, 1, 2.5 
+    //TO DO - make button for grouping aggregations 
     return (
-        <table id="ladderview">
-            <thead>
-            <tr>
-                <th>
-                    Market Size
-                </th>
-                <th>
-                    Price (USD)
-                </th>
-            </tr>
-        </thead>
-        <tbody id="askrows">
-            {asksRows}
-        </tbody>
-        <thead>
-            <tr>
-                <th>
-                    USD Spread
-                </th>
-                <th>
-                    {spread}
-                </th>
-            </tr>
-        </thead>
-        <tbody id="bidrows">
-            {bidsRows}
-        </tbody>
-        </table>
+        <div id="ladderview">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        Market Size
+                    </th>
+                    <th>
+                        Price (USD)
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="askrows">
+                    {asksRows}
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>
+                            USD Spread
+                        </th>
+                        <th>
+                            {spread}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="bidrows">
+                    {bidsRows}
+                </tbody>
+            </table>
+        </div>
     )
 }
 
