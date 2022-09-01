@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import './LadderViewDisplay.css'
+
 
 function AggregationDropDrown(props){
 
@@ -8,28 +10,31 @@ function AggregationDropDrown(props){
     }, [props.currency])
 
     return (
-        
-            <label for="aggregation">
-                Aggregation:
-                <div >
-                    <select className="aggdropdown-selection" value={props.aggregation}
-                    onChange={props.changeAgg}>
-                        <option value={.01}>
-                            .01
-                        </option>
-                        <option value={.50}>
-                            .50
-                        </option>
-                        <option value={1}>
-                            1
-                        </option>
-                        <option value={2.5}>
-                            2.5
-                        </option>
-                    </select>
-                </div>
-            </label>
-       
+        <div className="ladderviewdisplay-tables">
+            <div id="aggregationdropdown-orderbook">
+                Order Book
+            </div>  
+            <div id="aggregationdropdown-label" >
+                Aggregation
+            </div>
+            <div>
+                <select id="aggregationdropdown-selection" value={props.aggregation}
+                onChange={props.changeAgg}>
+                    <option value={.01}>
+                        .01
+                    </option>
+                    <option value={.50}>
+                        .50
+                    </option>
+                    <option value={1}>
+                        1
+                    </option>
+                    <option value={2.5}>
+                        2.5
+                    </option>
+                </select>  
+            </div>
+        </div>
     )
 }
 

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianAxis } from "recharts";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend} from "recharts";
+import './LineChart.css'
 
 
 function LineChartDisplay(props){
@@ -7,8 +7,8 @@ function LineChartDisplay(props){
     let max = Math.min(props.data.bidPrice, props.data.askPrice)
 
     return (
-        <div id='linechart'>
-            <LineChart width={800} height={500} data={props.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <div className='linechart'>
+            <LineChart width={1200} height={600} data={props.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="1" />
                 <XAxis dataKey='time' 
                 />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState  } from 'react';
 import './App.css';
 import StockPriceSize from './StockPriceSize/StockPriceSize';
 import CurrencyDropDown from './CurrencyDropDown/CurrencyDropDown';
@@ -17,6 +17,7 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [bidsArr, setBidsArr] = useState([]);
   const [asksArr, setAsksArr] = useState([]);
+  //adjust how often the order book data comes in by changing delay
   const [delay, setDelay] = useState(5000);
   const [aggregation, setAggregation] = useState(.01);
 
@@ -123,11 +124,12 @@ function resetAgg(){
 
   return (
     <div className="App">
+      <div id="app-heading">Order Book and Chart</div>
       <CurrencyDropDown handleChange={handleChange} currency={currency}/>
       <StockPriceSize currency={currency} bestAskPrice={bestAskPrice} bestAskQty={bestAskQty} bestBidPrice={bestBidPrice} bestBidQty={bestBidQty} graphData={graphData} isPaused={isPaused} bidsArr={bidsArr} asksArr={asksArr} delay={delay} emptyArrays={emptyArrays} handleSnapshotData={handleSnapshotData} filterBidsArr={filterBidsArr} filterAsksArr={filterAsksArr} setBestAfterSort={setBestAfterSort} setGraphDataAfterSort={setGraphDataAfterSort} handlePause={handlePause} updateLevels={updateLevels}/>
       <LineChartDisplay currency={currency} data={graphData}/>
-      <LadderViewDisplay asksArr={asksArr} bidsArr={bidsArr} aggregation={aggregation}/>
       <AggregationDropDrown aggregation={aggregation} changeAgg={changeAgg} resetAgg={resetAgg} currency={currency}/>
+      <LadderViewDisplay asksArr={asksArr} bidsArr={bidsArr} aggregation={aggregation} />
     </div>
   );
 }
@@ -135,31 +137,11 @@ function resetAgg(){
 export default App;
 
 /**
- Advice from Cara D.
- const App(){
-return (
-<CurrencyDropdown />
-<StockPriceSize />
-<Line Chart/>
-<LadderView />
-}
-
-or 
-<CurrencyDropdown />
-<StockView />
-stockView= {
-<PriceView />
-<LineChart />
-<LadderView />
-
-Also add more folders
-Dir {CurrencyDropDown}
-  > CurrencyDropdown.jsx
-  >CurrencyDropdown.css
-
 Make a read me
   how to install and run
   justify what I did or did not have time to do
 
 Use li for ladder view 
+
+TO DO finish styling and add read me
  */

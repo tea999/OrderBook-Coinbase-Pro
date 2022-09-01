@@ -40,8 +40,10 @@ function LadderViewDisplay(props){
     }
 
     function makeTableRows(levelsArr, transactionType){
+        let colored = {color:'green'}
         if (transactionType === 'asks'){
             levelsArr.reverse();
+            colored = {color:'red'}
         }
         return levelsArr.map((level, index) => {
             const price = level[0];
@@ -49,11 +51,10 @@ function LadderViewDisplay(props){
             return(
                 <tr key={index.toString()}>
                     <td>{size}</td>
-                    <td>{price}</td>
+                    <td style={colored}>{price}</td>
                 </tr>
             )
     })
-
 }
 
         const groupedAsksArr = groupByAggregation(props.asksArr, aggregation)
@@ -65,13 +66,12 @@ function LadderViewDisplay(props){
 
     },[props.asksArr, props.bidsArr, aggregation])
 
-    //TO DO - make button for grouping aggregations 
-    return (
-        <div id="ladderview">
-            <table>
+    return (        
+        <div className="ladderviewdisplay-tables">
+            <table className="ladderviewdisplay-table-box">
                 <thead>
                 <tr>
-                    <th>
+                    <th >
                         Market Size
                     </th>
                     <th>
@@ -79,7 +79,7 @@ function LadderViewDisplay(props){
                     </th>
                 </tr>
                 </thead>
-                <tbody id="askrows">
+                <tbody id="ladderviewdisplay-askrows" >
                     {asksRows}
                 </tbody>
                 <thead>
@@ -92,7 +92,7 @@ function LadderViewDisplay(props){
                         </th>
                     </tr>
                 </thead>
-                <tbody id="bidrows">
+                <tbody id="ladderviewdisplay-bidrows">
                     {bidsRows}
                 </tbody>
             </table>

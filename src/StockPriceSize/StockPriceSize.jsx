@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import './StockPriceSize.css';
 
 function StockPriceSize(props){
     const webSocket = useRef(null)
@@ -109,11 +110,29 @@ function StockPriceSize(props){
             <button onClick={props.handlePause}>
                 {props.isPaused ? "Continue Data Feed" : "Stop Data Feed"}
             </button>
-            <div>
-                <ul>Best Bid price {props.bestBidPrice}</ul>
-                <ul>Best Bid Qty {props.bestBidQty}</ul>
-                <ul>Best Ask Price {props.bestAskPrice}</ul>
-                <ul>Best Ask Qty {props.bestAskQty}</ul>
+            <div id="Stockpricesize-tables">
+                <table id="Stockpricesize-bidtb">
+                    <thead>
+                        <tr>
+                            <th>Best Bid</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>Price {props.bestBidPrice}</td>
+                        <td>Quantity {props.bestBidQty}</td>
+                    </tr>
+                </table>
+                <table id="Stockpricesize-asktb">
+                    <thead>
+                        <th>
+                            Best Ask
+                        </th>
+                    </thead>
+                    <tr>
+                        <td>Price {props.bestAskPrice}</td>
+                        <td>Quantity {props.bestAskQty}</td>
+                    </tr>
+                </table>
             </div>
 
 
