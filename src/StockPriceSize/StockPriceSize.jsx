@@ -110,32 +110,34 @@ function StockPriceSize(props){
             <button onClick={props.handlePause}>
                 {props.isPaused ? "Continue Data Feed" : "Stop Data Feed"}
             </button>
-            <div id="Stockpricesize-tables">
-                <table id="Stockpricesize-bidtb">
-                    <thead>
-                        <tr>
-                            <th>Best Bid</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td>Price {props.bestBidPrice}</td>
-                        <td>Quantity {props.bestBidQty}</td>
-                    </tr>
-                </table>
-                <table id="Stockpricesize-asktb">
-                    <thead>
-                        <th>
-                            Best Ask
-                        </th>
-                    </thead>
-                    <tr>
-                        <td>Price {props.bestAskPrice}</td>
-                        <td>Quantity {props.bestAskQty}</td>
-                    </tr>
-                </table>
-            </div>
-
-
+            <div className='Stockpricesize-container'>
+                <div className='Stockpricesize-best-bid'>
+                    <div className='Stockpricesize-name'>
+                        Best Bid
+                    </div> 
+                    Price 
+                    <div className='Stockpricesize-name'>
+                    {props.bestBidPrice}
+                    </div>
+                    Quantity 
+                    <div className='Stockpricesize-name'>
+                        {props.bestBidQty}
+                    </div>
+                </div>
+                <div className='Stockpricesize-best-ask'>
+                    <div className='Stockpricesize-name'> 
+                        Best Ask
+                    </div>
+                        Price 
+                    <div className='Stockpricesize-name'>
+                        {props.bestAskPrice}
+                    </div>
+                    Quantity 
+                    <div className='Stockpricesize-name'>
+                        {props.bestAskQty}
+                    </div>
+                </div>
+            </div>  
         </div>
     );
 }

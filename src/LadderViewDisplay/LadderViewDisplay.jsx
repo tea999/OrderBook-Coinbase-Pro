@@ -69,7 +69,7 @@ function LadderViewDisplay(props){
     return (        
         <div className="ladderviewdisplay-tables">
             <table className="ladderviewdisplay-table-box">
-                <thead>
+                <thead >
                 <tr>
                     <th >
                         Market Size
@@ -79,10 +79,10 @@ function LadderViewDisplay(props){
                     </th>
                 </tr>
                 </thead>
-                <tbody id="ladderviewdisplay-askrows" >
+                <tbody >
                     {asksRows}
                 </tbody>
-                <thead>
+                <thead >
                     <tr>
                         <th>
                             USD Spread
@@ -92,7 +92,7 @@ function LadderViewDisplay(props){
                         </th>
                     </tr>
                 </thead>
-                <tbody id="ladderviewdisplay-bidrows">
+                <tbody >
                     {bidsRows}
                 </tbody>
             </table>

@@ -2,3 +2,22 @@ button {
     font-size: 1.2rem;
     background-color: #d9d9d9;
 }
+
+.Stockpricesize-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+}
+.Stockpricesize-name{
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.Stockpricesize-best-ask{
+    flex: 1
+}
+.Stockpricesize-best-bid{
+
+}

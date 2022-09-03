@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import './LadderViewDisplay.css'
+import '../LadderViewDisplay/LadderViewDisplay.css'
 
 
 function AggregationDropDrown(props){

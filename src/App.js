@@ -4,7 +4,7 @@ import StockPriceSize from './StockPriceSize/StockPriceSize';
 import CurrencyDropDown from './CurrencyDropDown/CurrencyDropDown';
 import LineChartDisplay from './LineChart/LineChart';
 import LadderViewDisplay from './LadderViewDisplay/LadderViewDisplay';
-import AggregationDropDrown from './LadderViewDisplay/AggregationDropDown';
+import AggregationDropDrown from './AggregationDropDown/AggregationDropDown';
 
 function App() {
   // put the state here to make components modular
