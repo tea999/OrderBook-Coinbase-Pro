@@ -116,11 +116,11 @@ function StockPriceSize(props){
                         Best Bid
                     </div> 
                     Price 
-                    <div className='Stockpricesize-name'>
+                    <div className='Stockpricesize-numbers'>
                     {props.bestBidPrice}
                     </div>
                     Quantity 
-                    <div className='Stockpricesize-name'>
+                    <div className='Stockpricesize-numbers'>
                         {props.bestBidQty}
                     </div>
                 </div>
@@ -129,11 +129,11 @@ function StockPriceSize(props){
                         Best Ask
                     </div>
                         Price 
-                    <div className='Stockpricesize-name'>
+                    <div className='Stockpricesize-numbers'>
                         {props.bestAskPrice}
                     </div>
                     Quantity 
-                    <div className='Stockpricesize-name'>
+                    <div className='Stockpricesize-numbers'>
                         {props.bestAskQty}
                     </div>
                 </div>

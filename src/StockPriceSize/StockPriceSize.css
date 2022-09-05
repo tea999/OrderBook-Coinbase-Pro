@@ -8,16 +8,26 @@ button {
     justify-content: center;
     align-items: center;
     align-content: center;
+
     
 }
+
 .Stockpricesize-name{
-    font-weight: 700;
+    font-weight: 550;
+    font-size: 2.0rem;
+    padding: 10px;
+}
+
+.Stockpricesize-numbers{
+    font-weight: 550;
     font-size: 1.3rem;
+    padding: 10px;
 }
 
 .Stockpricesize-best-ask{
     flex: 1
 }
 .Stockpricesize-best-bid{
+    flex: 1
 
 }
