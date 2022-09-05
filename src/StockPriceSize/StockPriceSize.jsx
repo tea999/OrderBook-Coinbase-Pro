@@ -112,11 +112,11 @@ function StockPriceSize(props){
             </button>
             <div className='Stockpricesize-container'>
                 <div className='Stockpricesize-best-bid'>
-                    <div className='Stockpricesize-name'>
+                    <div className='Stockpricesize-name' id='Stockpricesize-bid'>
                         Best Bid
                     </div> 
                     Price 
-                    <div className='Stockpricesize-numbers'>
+                    <div className='Stockpricesize-numbers' >
                     {props.bestBidPrice}
                     </div>
                     Quantity 
@@ -125,7 +125,7 @@ function StockPriceSize(props){
                     </div>
                 </div>
                 <div className='Stockpricesize-best-ask'>
-                    <div className='Stockpricesize-name'> 
+                    <div className='Stockpricesize-name' id='Stockpricesize-ask'> 
                         Best Ask
                     </div>
                         Price 

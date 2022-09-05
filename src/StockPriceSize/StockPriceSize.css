@@ -8,7 +8,8 @@ button {
     justify-content: center;
     align-items: center;
     align-content: center;
-
+    margin-top: 20px;
+    margin-bottom: 20px;
     
 }
 
@@ -16,7 +17,21 @@ button {
     font-weight: 550;
     font-size: 2.0rem;
     padding: 10px;
+    border: 1px solid;
+    color: white;
+
 }
+
+#Stockpricesize-bid{
+    background-color: green;
+}
+
+#Stockpricesize-ask{
+    background-color: rgb(229, 26, 26);
+
+}
+
+
 
 .Stockpricesize-numbers{
     font-weight: 550;
@@ -25,9 +40,12 @@ button {
 }
 
 .Stockpricesize-best-ask{
-    flex: 1
+    flex: 1;
+    border: 1px solid;
+
 }
 .Stockpricesize-best-bid{
-    flex: 1
+    flex: 1;
+    border: 1px solid;
 
 }
