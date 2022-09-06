@@ -4,7 +4,6 @@ import '../LadderViewDisplay/LadderViewDisplay.css'
 
 function AggregationDropDrown(props){
 
-    // aggregations - .01, .50, 1, 2.5 
     useEffect(() =>{
         props.resetAgg()
     }, [props.currency])

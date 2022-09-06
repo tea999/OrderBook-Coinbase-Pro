@@ -7,7 +7,6 @@ import LadderViewDisplay from './LadderViewDisplay/LadderViewDisplay';
 import AggregationDropDrown from './AggregationDropDown/AggregationDropDown';
 
 function App() {
-  // put the state here to make components modular
   const [currency, setCurrency] = useState("BTC-USD");
   const [bestBidPrice, setBestBidPrice] = useState("");
   const [bestBidQty, setBestBidQty] = useState("");

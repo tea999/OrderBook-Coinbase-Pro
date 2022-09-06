@@ -31,6 +31,7 @@ function StockPriceSize(props){
             webSocketCurrent.close()
         }
     }, [props.currency])
+
     // to handle the incoming messagess/grab all data
     useEffect(() => {
         if (!webSocket.current) return;
@@ -143,4 +144,3 @@ function StockPriceSize(props){
 }
 export default StockPriceSize;
 
-//Question - should I use current time or trade time? Also, how do I get this to update like every 15sec starting from 00 to 15 to 30 to 45 or is this a feature of the line graph/rechart library?
