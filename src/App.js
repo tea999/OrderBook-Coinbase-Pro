@@ -136,12 +136,4 @@ function resetAgg(){
 
 export default App;
 
-/**
-Make a read me
-  how to install and run
-  justify what I did or did not have time to do
 
-Use li for ladder view 
-
-TO DO finish styling and add read me
- */
