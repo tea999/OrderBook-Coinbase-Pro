@@ -12,7 +12,7 @@ function LineChartDisplay(props){
                 <CartesianGrid strokeDasharray="1" />
                 <XAxis dataKey='time' 
                 />
-                <YAxis  type='number' domain={[min - min/2, max + max/2]} />
+                <YAxis  type='number' domain={[min - min/2, max + max/2]} tickCount={6} tickFormatter={value => value.toFixed(2)} allowDecimals={true}/>
                 <Tooltip />
                 <Legend />
                 <Line type='monotone' dataKey='askPrice' stroke="#FF0000" />
