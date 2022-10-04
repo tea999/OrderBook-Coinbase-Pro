@@ -129,6 +129,7 @@ function resetAgg(){
       <LineChartDisplay currency={currency} data={graphData}/>
       <AggregationDropDrown aggregation={aggregation} changeAgg={changeAgg} resetAgg={resetAgg} currency={currency}/>
       <LadderViewDisplay asksArr={asksArr} bidsArr={bidsArr} aggregation={aggregation} />
+      *Do not use for actual investing advice
     </div>
   );
 }
