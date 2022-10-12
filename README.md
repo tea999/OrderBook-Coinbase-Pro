@@ -4,6 +4,9 @@ Order books are used by financial exchanges to provide information on price, ava
 
 The goal of this application is to consume real-time data from the Coinbase-Pro level 2 channel feed and display a chart and ladder view of the order book. The data can be adjusted based on the currency pair or the amount of aggregation of prices by setting price increments. 
 
+Green represents the highest price a buyer is willing to pay.
+Red represents the lowest price a seller is willing to take.
+
 Website to use the Order Book:
 https://orderbook-cbp.vercel.app/ 
 
