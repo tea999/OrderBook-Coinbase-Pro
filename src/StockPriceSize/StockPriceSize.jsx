@@ -4,7 +4,7 @@ import './StockPriceSize.css';
 function StockPriceSize(props){
     const webSocket = useRef(null)
 
-    // to open websocket and send requst 
+    // to open websocket and send requst
     useEffect(() => {
         //empty out arrays if there is a currency change
         props.emptyArrays();
@@ -14,7 +14,7 @@ function StockPriceSize(props){
             "product_ids" : [
                 props.currency
             ],
-            "channels" : ["level2"]
+            "channels" : ["level2_batch"]
         }
 
         webSocket.current.onopen = () => {
@@ -39,7 +39,9 @@ function StockPriceSize(props){
             if (props.isPaused) {
                 return;
             };
+            //console.log(e.data)
             const msg = JSON.parse(e.data);
+            //console.log(msg)
             // is this the first time we are collecting data
             if (msg.type === 'snapshot'){
                 props.handleSnapshotData(msg)
@@ -69,7 +71,7 @@ function StockPriceSize(props){
                     }
                 }
             }
-        
+
         }
     },[props.isPaused, props.currency])
 
@@ -101,12 +103,12 @@ function StockPriceSize(props){
             bidPrice: Number(props.bestBidPrice),
             askPrice: Number(props.bestAskPrice),
             time:`${hour}:${minutes}:${seconds}`
-        }; 
+        };
         props.setGraphDataAfterSort(dataObj);
     }, !props.isPaused ? props.delay : null);
 
 
-    return( 
+    return(
         <div>
             <button onClick={props.handlePause}>
                 {props.isPaused ? "Continue Data Feed" : "Stop Data Feed"}
@@ -115,30 +117,30 @@ function StockPriceSize(props){
                 <div className='Stockpricesize-best-bid'>
                     <div className='Stockpricesize-name' id='Stockpricesize-bid'>
                         Best Bid
-                    </div> 
-                    Price 
+                    </div>
+                    Price
                     <div className='Stockpricesize-numbers' >
                     {props.bestBidPrice}
                     </div>
-                    Quantity 
+                    Quantity
                     <div className='Stockpricesize-numbers'>
                         {props.bestBidQty}
                     </div>
                 </div>
                 <div className='Stockpricesize-best-ask'>
-                    <div className='Stockpricesize-name' id='Stockpricesize-ask'> 
+                    <div className='Stockpricesize-name' id='Stockpricesize-ask'>
                         Best Ask
                     </div>
-                        Price 
+                        Price
                     <div className='Stockpricesize-numbers'>
                         {props.bestAskPrice}
                     </div>
-                    Quantity 
+                    Quantity
                     <div className='Stockpricesize-numbers'>
                         {props.bestAskQty}
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     );
 }
